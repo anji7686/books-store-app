@@ -86,6 +86,7 @@ test:
 #
 production:
   <<: *default
+  host: localhost
   database: books-store-app_production
-  username: books-store-app
-  password: <%= ENV['BOOKS-STORE-APP_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: postgres
