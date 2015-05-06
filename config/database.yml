@@ -17,22 +17,23 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 5
-
-development:
-  <<: *default
   host: localhost
   username: postgres
   password: postgres
-  database: books-store-app_development
+  pool: 5
+  timeout: 5000
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+
+development:
+  <<: *default
+  database: blog_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: books-store-app
+  #username: blog
 
   # The password associated with the postgres role (username).
   #password:
@@ -60,10 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  host: localhost
-  username: postgres
-  password: postgres
-  database: books-store-app_test
+  database: blog_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -86,7 +84,6 @@ test:
 #
 production:
   <<: *default
-  host: localhost
-  database: books-store-app_production
-  username: postgres
-  password: postgres
+  database: blog_production
+  username: blog
+  password: <%= ENV['BLOG_DATABASE_PASSWORD'] %>
